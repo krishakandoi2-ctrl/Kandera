@@ -70,7 +70,9 @@ h2 {
   display: flex;
   align-items: center;
   gap: 10px;
+  text-decoration: none;
 }
+
 
 .logo-mark {
   width: 38px;
@@ -115,10 +117,11 @@ h2 {
   height: 90vh;
 }
 
-.hero-media img {
+.hero-media img{
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
 }
 
 .hero-overlay {
@@ -293,12 +296,50 @@ h2 {
 /* =====================
    FAQ
 ===================== */
-.faq-item {
-  background: white;
-  padding: 20px;
-  border-radius: var(--radius);
-  margin-bottom: 15px;
+/* ===== FAQ: Fix iPhone/Safari triangle + make it consistent ===== */
+.faq-item summary {
+  list-style: none;              /* removes default marker in many browsers */
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 18px;
+  border-radius: 16px;
+  background: #fff;
 }
+
+/* Safari/iPhone default marker */
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Custom + icon */
+.faq-item summary::after {
+  content: "+";
+  font-size: 22px;
+  line-height: 1;
+  opacity: 0.7;
+}
+
+/* Change to - when open */
+.faq-item[open] summary::after {
+  content: "–";
+  opacity: 0.9;
+}
+
+.faq-item p {
+  margin: 10px 18px 18px;
+  color: #555;
+}
+.faq{
+  display: grid;
+  gap: 14px;
+}
+.faq-item summary{
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+}
+
 
 /* =====================
    FOOTER
@@ -314,17 +355,26 @@ h2 {
    MOBILE
 ===================== */
 @media (max-width: 768px) {
-  .nav {
-    display: none;
+  .nav { display: none; }
+
+  .nav.open{
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    position: absolute;
+    top: 70px;
+    right: 20px;
+    background: white;
+    padding: 16px;
+    border-radius: 14px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.12);
   }
 
-  .nav-toggle {
-    display: block;
-  }
+  .nav-toggle { display: block; }
 
-  .hero h1 {
-    font-size: 2.2rem;
-  }
+  .hero h1 { font-size: 2.2rem; }
+}
+
 }
 /* Clickable tiles + products */
 .tile-link, .product-link { display: block; color: inherit; text-decoration: none; }
